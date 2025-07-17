@@ -41,7 +41,7 @@ output "db_endpoint" {
 
 # EC2 for Backend (Go)
 resource "aws_instance" "backend_server" {
-  ami           = "ami-08ae91d91a31119d0"  # Amazon Linux 2 - find latest in AWS EC2 > Launch Instance > Search "Amazon Linux"
+  ami           = "ami-0150ccaf51ab55a51"  # Amazon Linux 2 - find latest in AWS EC2 > Launch Instance > Search "Amazon Linux"
   instance_type = "t2.micro"
   vpc_security_group_ids = [aws_security_group.app_sg.id]
   user_data = <<-EOF
@@ -57,7 +57,7 @@ resource "aws_instance" "backend_server" {
 
 # EC2 for AI (Python)
 resource "aws_instance" "ai_server" {
-  ami           = "ami-08ae91d91a31119d0"
+  ami           = "ami-0150ccaf51ab55a51"
   instance_type = "t2.micro"
   vpc_security_group_ids = [aws_security_group.app_sg.id]
   user_data = <<-EOF
