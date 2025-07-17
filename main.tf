@@ -5,7 +5,7 @@ provider "aws" {
 resource "aws_db_instance" "ipam_db" {
   allocated_storage    = 20  # 20 GB, free-tier eligible
   engine               = "postgres"
-  engine_version       = "16.3"  # Latest stable PostgreSQL
+  engine_version       = "16"  # Auto-uses latest minor (fixes downgrade error)reSQL
   instance_class       = "db.t3.micro"  # Small, free-tier instance
   db_name              = "ipamdb"  # Database name
   username             = "pgadmin"  # DB admin username
@@ -43,7 +43,7 @@ output "db_endpoint" {
 resource "aws_instance" "backend_server" {
   ami           = "ami-08ae91d91a31119d0"  # Amazon Linux 2 - find latest in AWS EC2 > Launch Instance > Search "Amazon Linux"
   instance_type = "t2.micro"
-  security_group_ids = [aws_security_group.app_sg.id]
+  vpc_security_group_ids = [aws_security_group.app_sg.id]
   user_data = <<-EOF
     #!/bin/bash
     yum update -y
@@ -59,7 +59,7 @@ resource "aws_instance" "backend_server" {
 resource "aws_instance" "ai_server" {
   ami           = "ami-08ae91d91a31119d0"
   instance_type = "t2.micro"
-  security_group_ids = [aws_security_group.app_sg.id]
+  vpc_security_group_ids = [aws_security_group.app_sg.id]
   user_data = <<-EOF
     #!/bin/bash
     yum update -y
