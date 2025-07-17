@@ -96,9 +96,20 @@ resource "aws_security_group" "app_sg" {
   }
 }
 
-# S3 for Frontend (static hosting)
+# S3 for Frontend
 resource "aws_s3_bucket" "frontend_bucket" {
-  bucket = "ironcore-frontend-bucket"
+  bucket = "ironcore-frontend-bucket-unique"  # Make unique if duplicate error
+}
+
+resource "aws_s3_bucket_website_configuration" "frontend_website" {
+  bucket = aws_s3_bucket.frontend_bucket.id
+
+  index_document {
+    suffix = "index.html"
+  }
+  error_document {
+    key = "error.html"
+  }
 }
 
 resource "aws_s3_bucket_public_access_block" "frontend_public" {
@@ -132,5 +143,5 @@ output "ai_url" {
 }
 
 output "frontend_url" {
-  value = aws_s3_bucket.frontend_bucket.website_endpoint
+  value = "http://${aws_s3_bucket_website_configuration.frontend_website.website_endpoint}"
 }
