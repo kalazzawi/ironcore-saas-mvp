@@ -8,7 +8,7 @@ export default function IPAMDashboard() {
 
   useEffect(() => {
     // Fetch prefixes from backend API
-    fetch('http://localhost:8080/ipam/prefixes')
+    fetch('http://18.206.190.100:8080/ipam/prefixes')
       .then(res => res.json())
       .then(data => setPrefixes(data))
       .catch(err => console.error("Error fetching prefixes:", err));
