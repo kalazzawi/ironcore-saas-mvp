@@ -24,7 +24,7 @@ func main() {
 	var err error
 
 	// Replace with environment variables or constants in production
-	connStr := "postgres://pgadmin:L3arn!ng2C0d3MyWay@terraform-20250716025120718500000001.cuvkum4aa8cx.us-east-1.rds.amazonaws.com:5432/ipamdb?sslmode=require"
+	connStr := "postgres://pgadmin:L3arn!ng2C0d3MyWay@terraform-20250723021154758600000001.cuvkum4aa8cx.us-east-1.rds.amazonaws.com:5432/ipamdb?sslmode=require"
 
 	db, err = sql.Open("postgres", connStr)
 	if err != nil {
